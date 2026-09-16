@@ -1,33 +1,52 @@
+import React, {useRef,useState } from "react";
 import "./App.css";
-import React, { useRef, useState } from "react";
-
 function App() {
+  const [isLoggedIn, setLogin] = useState(false);
   const [name, setName] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  const inputRef = useRef();
-
-  const handleLogin = () => {
-    setName(inputRef.current.value);
-    setLoggedIn(true);
-  };
 
   return (
-    <div>
-      {loggedIn ? (
-        <h1>Welcome {name}</h1>
-      ) : (
-        <>
+    <div className="title">
+      <div>
+        <h2>WELCOME TO THE FORM</h2>
+      </div>
+
+      <div>
+        <form>
+          <label>Name:</label>
           <input
             type="text"
-            ref={inputRef}
             placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <button onClick={handleLogin}>
-            Login
-          </button>
-        </>
-      )}
+          <br />
+
+          <label>Dept:</label>
+          <input
+            type="text"
+            placeholder="Enter your department name"
+          />
+          <br />
+
+          <label>RollNo:</label>
+          <input
+            type="text"
+            placeholder="Enter your rollno"
+          />
+          <br />
+
+          {isLoggedIn ? (
+            <h2>Welcome Student {name}</h2>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setLogin(true)}
+            >
+              Login
+            </button>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
